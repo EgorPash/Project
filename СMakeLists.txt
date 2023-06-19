@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 2.6)
+project(myfunc)
+
+# IMPORTANT!!!
+# Set install dir
+set(CMAKE_INSTALL_PREFIX /home/egorcom/mylib)
+
+#set (SRC_DIR ${PROJECT_SOURCE_DIR})
+
+add_library(myfunc SHARED myfunc.cpp myfunc.h)
+
+set(LIB_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/lib/)
+set(LIB_INCLUDE_PATH ${CMAKE_INSTALL_PREFIX}/include/)
+
+install(TARGETS myfunc DESTINATION ${LIB_INSTALL_PATH})
+install(FILES myfunc.h DESTINATION ${LIB_INCLUDE_PATH})
+
+add_custom_target(uninstall
+COMMAND rm -rf ${LIB_INSTALL_PATH}
+	rm -rf ${LIB_INCLUDE_PATH}
+)
